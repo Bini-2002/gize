@@ -29,7 +29,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const elements = Array.from(document.querySelectorAll(".reveal"));
+    const elements = Array.from(document.querySelectorAll(".reveal, .reveal-left, .reveal-right"));
     if (!elements.length) return;
 
     const observer = new IntersectionObserver(

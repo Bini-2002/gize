@@ -37,6 +37,28 @@ body {
   }
 }
 
+@keyframes gize-slide-in-left {
+  from {
+    opacity: 0;
+    transform: translate3d(-26px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes gize-slide-in-right {
+  from {
+    opacity: 0;
+    transform: translate3d(26px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 @keyframes gize-pulse-soft {
   0%,
   100% {
@@ -77,8 +99,43 @@ body {
   will-change: transform, opacity;
 }
 
+.reveal-left,
+.reveal-right {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.reveal-left {
+  transform: translate3d(-26px, 0, 0);
+}
+
+.reveal-right {
+  transform: translate3d(26px, 0, 0);
+}
+
 .reveal.is-revealed {
   animation: gize-slide-up 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.reveal-left.is-revealed {
+  animation: gize-slide-in-left 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.reveal-right.is-revealed {
+  animation: gize-slide-in-right 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* Desktop: keep the same slide-up feel (avoid lateral swipe on large layouts) */
+@media (min-width: 768px) {
+  .reveal-left,
+  .reveal-right {
+    transform: translate3d(0, 18px, 0);
+  }
+
+  .reveal-left.is-revealed,
+  .reveal-right.is-revealed {
+    animation: gize-slide-up 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
 }
 
 .tap-feedback {

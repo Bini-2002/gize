@@ -710,12 +710,8 @@ const StatsSection = () => {
               <div 
                 key={item.id} 
                 ref={el => cardRefs.current[index] = el}
-                className={`why-card relative rounded bg-white p-8 text-center shadow-lg transition-all duration-700 border-t-4 border-red-500 ring-1 ring-red-100/60
-                  ${isWhyChooseVisible ? 'animate-slideFromTop opacity-100' : 'opacity-0 translate-y-[-50px]'}`}
-                style={{
-                  animationDelay: isWhyChooseVisible ? `${index * 150}ms` : '0ms',
-                  animationFillMode: 'forwards'
-                }}
+                className={`why-card ${index % 2 === 0 ? "reveal-left" : "reveal-right"} relative rounded bg-white p-8 text-center shadow-lg transition-all duration-700 border-t-4 border-red-500 ring-1 ring-red-100/60`}
+                style={{ animationDelay: `${index * 110}ms` }}
               >
                 <div className="relative z-10">
                   <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-red-50 
@@ -742,14 +738,13 @@ const StatsSection = () => {
         <div className="mx-auto max-w-6xl px-4">
           <SectionTitle title="WHAT WE PROVIDE" underline />
 
-          <div className="mt-12 grid gap-8 md:grid-cols-3">
+          <div className="mt-12 grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 md:gap-8">
             {provideCards.map((card, idx) => (
               <div 
                 key={card.id} 
-                className="group bg-white shadow-sm transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-red-300/50 active:scale-95 animate-slideFromTop"
+                className={`group ${idx % 2 === 0 ? "reveal-left" : "reveal-right"} bg-white shadow-sm transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-red-300/50 active:scale-95`}
                 style={{
-                  animationDelay: `${idx * 0.2}s`,
-                  animationFillMode: 'both'
+                  animationDelay: `${idx * 110}ms`,
                 }}
                 onClick={(e) => {
                   // Add bounce effect on click/touch
@@ -759,7 +754,7 @@ const StatsSection = () => {
                   }, 300);
                 }}
               >
-                <div className="h-48 overflow-hidden">
+                <div className="h-28 overflow-hidden sm:h-48">
                   {provideImages[card.imgIndex] ? (
                     <img 
                       src={provideImages[card.imgIndex]} 
@@ -770,9 +765,9 @@ const StatsSection = () => {
                     <div className="h-full w-full bg-slate-200"></div>
                   )}
                 </div>
-                <div className="p-6 text-center">
+                <div className="p-4 text-center sm:p-6">
                   <h3 className="mb-3 text-sm font-bold uppercase text-slate-800">{card.title}</h3>
-                  <p className="mb-4 text-xs text-slate-500 leading-relaxed">{card.desc}</p>
+                  <p className="mb-4 text-[11px] text-slate-500 leading-relaxed sm:text-xs">{card.desc}</p>
                   <a href="#" className="text-xs font-bold text-red-600 hover:text-red-700 flex items-center justify-center gap-1 group/arrow">
                     Learn More 
                     <span className="transition-transform duration-300 group-hover/arrow:translate-x-1">→</span>
