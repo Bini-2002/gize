@@ -32,12 +32,25 @@ export default function App() {
     const elements = Array.from(document.querySelectorAll(".reveal, .reveal-left, .reveal-right"));
     if (!elements.length) return;
 
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
+          const el = entry.target;
+          const isSideReveal = el.classList.contains("reveal-left") || el.classList.contains("reveal-right");
+
           if (entry.isIntersecting) {
-            entry.target.classList.add("is-revealed");
-            observer.unobserve(entry.target);
+            el.classList.add("is-revealed");
+
+            // Keep observing left/right reveals on mobile so they can animate again
+            // when the user scrolls back up.
+            if (!(isMobile && isSideReveal)) {
+              observer.unobserve(el);
+            }
+          } else if (isMobile && isSideReveal) {
+            // Reset when out of view so the animation can replay.
+            el.classList.remove("is-revealed");
           }
         }
       },
