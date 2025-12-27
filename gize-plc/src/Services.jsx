@@ -100,10 +100,10 @@ export default function Services() {
             subtitle="Comprehensive logistics solutions tailored to meet your specific needs"
           />
           <div className="mt-12 grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 md:gap-10">
-            {services.map((service) => (
+            {services.map((service, idx) => (
               <div
                 key={service.id}
-                className="group reveal card-lift relative rounded-xl bg-white p-4 text-center shadow-lg transition-all duration-500 hover:-translate-y-3 hover:scale-[1.02] hover:shadow-2xl hover:shadow-red-100/50 sm:p-6"
+                className={`group ${idx % 2 === 0 ? "reveal-left" : "reveal-right"} card-lift relative rounded-xl bg-white p-4 text-center shadow-lg transition-all duration-500 hover:-translate-y-3 hover:scale-[1.02] hover:shadow-2xl hover:shadow-red-100/50 sm:p-6`}
               >
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/0 via-white/0 to-white/0 transition-all duration-700 group-hover:from-red-50/20 group-hover:via-white/0 group-hover:to-blue-50/20" />
                 <div className="absolute inset-0 rounded-xl border border-transparent transition-all duration-500 group-hover:border-red-200/30" />
