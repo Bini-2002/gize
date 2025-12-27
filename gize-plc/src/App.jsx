@@ -1,10 +1,23 @@
 import { useEffect, useState } from "react";
 
+import Header from "./components/Header.jsx";
+import Footer from "./components/Footer.jsx";
+
 import Homepage from "./Homepage.jsx";
 import About from "./About.jsx";
 import Services from "./Services.jsx";
 import FAQ from "./FAQ.jsx";
 import Contact from "./Contact.jsx";
+import ContactSection from "./ContactSection.jsx";
+import FooterCTA from "./FooterCTA.jsx";
+import PrivacyPolicy from "./PrivacyPolicy.jsx";
+import TermsAndConditions from "./TermsAndConditions.jsx";
+import Shipping from "./Shipping.jsx";
+import FreightForwarding from "./FreightForwarding.jsx";
+import PortHandling from "./PortHandling.jsx";
+import Warehousing from "./Warehousing.jsx";
+import Transportation from "./Transportation.jsx";
+import CustomsClearance from "./CustomsClearance.jsx";
 
 export default function App() {
   const [hash, setHash] = useState(() => window.location.hash);
@@ -15,9 +28,69 @@ export default function App() {
     return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
 
-  if (hash === "#contact") return <Contact />;
-  if (hash === "#faq") return <FAQ />;
-  if (hash === "#services") return <Services />;
-  if (hash === "#about") return <About />;
-  return <Homepage />;
+  useEffect(() => {
+    const elements = Array.from(document.querySelectorAll(".reveal"));
+    if (!elements.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-revealed");
+            observer.unobserve(entry.target);
+          }
+        }
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -10% 0px" },
+    );
+
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [hash]);
+
+  const Page =
+    hash === "#shipping-service"
+      ? Shipping
+      : hash === "#freight-service"
+        ? FreightForwarding
+        : hash === "#port-service"
+          ? PortHandling
+          : hash === "#warehouse-service"
+            ? Warehousing
+            : hash === "#transport-service"
+              ? Transportation
+              : hash === "#customs-service"
+                ? CustomsClearance
+                : hash === "#contact"
+                  ? Contact
+                  : hash === "#faq"
+                    ? FAQ
+                    : hash === "#services"
+                      ? Services
+                      : hash === "#about"
+                        ? About
+                        : hash === "#privacy"
+                          ? PrivacyPolicy
+                          : hash === "#terms"
+                            ? TermsAndConditions
+                            : Homepage;
+
+  const isHomepage = hash === "" || hash === "#" || hash === undefined;
+  const isContactPage = hash === "#contact";
+
+  return (
+    <div className="min-h-screen bg-white">
+      <Header />
+      <main>
+        <div key={hash || "#home"} className="page-fade-in">
+          <Page />
+        </div>
+        {!isHomepage && !isContactPage && <ContactSection />}
+      </main>
+      <div className="bg-[#0D4250] pt-12 md:pt-14">
+        <FooterCTA />
+        <Footer />
+      </div>
+    </div>
+  );
 }

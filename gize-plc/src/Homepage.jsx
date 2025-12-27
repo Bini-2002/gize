@@ -155,7 +155,7 @@ const TestimonialCarousel = () => {
   const visibleTestimonials = getVisibleTestimonials();
 
   return (
-    <section className="bg-slate-50 py-5 md:py-10 overflow-hidden">
+    <section className="bg-[#fff1f1] py-5 md:py-10 overflow-hidden">
       <div className="mx-auto max-w-7xl px-2">
         <div className="text-center mb-5">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3 uppercase tracking-tight">
@@ -415,26 +415,42 @@ const StatsSection = () => {
 
   return (
     <section ref={sectionRef} className="py-16 bg-slate-50">
-      <div className="mx-auto max-w-7xl px-4">
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-          {stats.map((stat, i) => (
-            <div 
-              key={i} 
-              className="rounded bg-white p-6 text-center shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-lg border-l-4 border-red-600"
-              style={{ animationDelay: `${i * 0.2}s` }}
-            >
-              <div className="text-4xl font-bold text-red-600">
-                <CountUp end={stat.target} suffix={stat.suffix} isVisible={isVisible} />
-              </div>
-              <div className="mt-2 h-1 w-12 bg-red-600 mx-auto mb-4 rounded-full transition-all duration-300" />
-              <div className="text-xs font-medium text-slate-500 uppercase tracking-wide leading-tight">
-                {stat.label}
-              </div>
-            </div>
-          ))}
+  <div className="mx-auto max-w-7xl px-4">
+    <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+      {stats.map((stat, i) => (
+        <div
+          key={i}
+          className="relative overflow-hidden rounded-xl p-4 text-center shadow-md transition-transform duration-500 hover:-translate-y-2 hover:scale-105 hover:shadow-lg"
+          style={{
+            animationDelay: `${i * 0.2}s`,
+            background: "linear-gradient(135deg, #FF6B6B 0%, #FF8787 100%)"
+          }}
+        >
+          {/* Decorative Top Circle */}
+          <div className="absolute -top-3 left-1/2 -translate-x-1/2 h-6 w-6 rounded-full bg-white/30 animate-pulse" />
+
+          {/* Number */}
+          <div className="text-3xl font-extrabold text-white mb-1 drop-shadow-md">
+            <CountUp end={stat.target} suffix={stat.suffix} isVisible={isVisible} />
+          </div>
+
+          {/* Underline bar */}
+          <div className="mx-auto mb-2 h-1 w-12 rounded-full bg-white/70 transition-all duration-500" />
+
+          {/* Label */}
+          <div className="text-[10px] font-semibold uppercase tracking-widest text-white/90 leading-tight">
+            {stat.label}
+          </div>
+
+          {/* Hover overlay effect */}
+          <div className="absolute inset-0 rounded-xl bg-white/10 opacity-0 transition-opacity duration-300 group-hover:opacity-20"></div>
         </div>
-      </div>
-    </section>
+      ))}
+    </div>
+  </div>
+</section>
+
+
   );
 };
 
@@ -442,7 +458,6 @@ const StatsSection = () => {
 
   const [heroIndex, setHeroIndex] = useState(0);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  const [activeCard, setActiveCard] = useState(null);
   
   // Refs for animation
   const whyChooseRef = useRef(null);
@@ -551,12 +566,7 @@ const StatsSection = () => {
     { id: "customs", title: "CUSTOMS CLEARANCE", desc: "Our customs clearance services ensure your shipments comply with all regulations and pass through customs without delays.", imgIndex: 5 },
   ];
 
-  const stats = [
-    { value: "15+", label: "Years Experience" },
-    { value: "1000+", label: "Clients Worldwide" },
-    { value: "50+", label: "Countries Served" },
-    { value: "24/7", label: "Customer Support" },
-  ];
+  
 
   const faqs = [
     { q: "How can I track a shipment?", a: "Founded in Ethiopia's capital, Addis Ababa, over eighteen years ago, Gize PLC has established itself as a reputed leader in the transportation and logistics sector in the country and region at large." },
@@ -566,29 +576,6 @@ const StatsSection = () => {
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-600">
-      {/* NAVBAR */}
-      <header className="sticky top-0 z-50 bg-white shadow-sm">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 md:px-8">
-          <div className="flex items-center">
-            <img src={logo} alt="Gize PLC" className="h-12 w-auto" />
-          </div>
-
-          <nav className="hidden md:flex items-center gap-8 text-xs font-bold tracking-widest text-slate-800 uppercase">
-            <a href="#" className="hover:text-red-600 transition-colors">Home</a>
-            <a href="#services" className="hover:text-red-600 transition-colors">Services</a>
-            <a href="#about" className="hover:text-red-600 transition-colors">About Us</a>
-            <a href="#faq" className="hover:text-red-600 transition-colors">FAQ</a>
-          </nav>
-
-          <a
-            href="#contact"
-            className="hidden md:inline-block rounded bg-red-500 px-6 py-2 text-xs font-bold text-white uppercase tracking-wide shadow-md transition hover:bg-red-600"
-          >
-            contact us
-          </a>
-        </div>
-      </header>
-
       {/* HERO SECTION - FIXED ARROWS AND FASTER TRANSITIONS */}
       <section className="relative h-[500px] w-full overflow-hidden bg-slate-900">
         {/* Slideshow Background */}
@@ -622,20 +609,20 @@ const StatsSection = () => {
         <div className="relative z-30 flex h-full flex-col items-center justify-center px-4 text-center text-white">
           <div key={heroSlides[heroIndex].id} className="max-w-3xl">
             <h1
-              className={`${prefersReducedMotion ? "" : "animate-heroIn"} text-3xl md:text-5xl font-extrabold uppercase tracking-wider drop-shadow-md`}
+              className={`${prefersReducedMotion ? "" : "hero-title-reveal"} text-3xl md:text-5xl font-extrabold uppercase tracking-wider drop-shadow-md`}
             >
               {heroSlides[heroIndex].title}
             </h1>
             <p
-              className={`${prefersReducedMotion ? "" : "animate-heroIn"} mt-4 max-w-2xl mx-auto text-sm md:text-base font-light text-slate-100`}
-              style={prefersReducedMotion ? undefined : { animationDelay: "140ms" }}
+              className={`${prefersReducedMotion ? "" : "hero-fade-up"} mt-4 max-w-2xl mx-auto text-sm md:text-base font-light text-slate-100`}
+              style={prefersReducedMotion ? undefined : { animationDelay: "520ms" }}
             >
               {heroSlides[heroIndex].desc}
             </p>
 
             <div
-              className={`${prefersReducedMotion ? "" : "animate-heroIn"} mt-8 flex flex-col sm:flex-row items-center justify-center gap-4`}
-              style={prefersReducedMotion ? undefined : { animationDelay: "260ms" }}
+              className={`${prefersReducedMotion ? "" : "hero-fade-up"} mt-8 flex flex-col sm:flex-row items-center justify-center gap-4`}
+              style={prefersReducedMotion ? undefined : { animationDelay: "760ms" }}
             >
               <a
                 href="#services"
@@ -672,20 +659,6 @@ const StatsSection = () => {
           </div>
         </div>
 
-        {/* Floating Badges */}
-        <div className="absolute left-8 top-1/2 -translate-y-1/2 space-y-4 hidden md:block z-30">
-           <div className="flex items-center gap-3 rounded-full bg-red-500 px-4 py-2 text-white shadow-lg animate-floaty">
-             <div className="text-[10px] font-bold leading-tight">
-               Call Us Now<br/><span className="font-normal opacity-80">24/7 Support</span>
-             </div>
-           </div>
-           <div className="flex items-center gap-3 rounded-full bg-green-500 px-4 py-2 text-white shadow-lg animate-floaty" style={{animationDelay: '1s'}}>
-             <div className="text-[10px] font-bold leading-tight">
-               Chat With Us<br/><span className="font-normal opacity-80">We're online now</span>
-             </div>
-           </div>
-        </div>
-
         {/* FIXED ARROWS - Added z-40 and pointer-events-auto */}
         <button
           type="button"
@@ -705,8 +678,27 @@ const StatsSection = () => {
         </button>
       </section>
 
+      {/* Split badges between hero + next section */}
+      <div className="relative z-40 hidden md:block h-0">
+        <div className="absolute left-8 top-0 -translate-y-1/2 space-y-4">
+          <div className="flex items-center gap-3 rounded-full bg-red-500 px-4 py-2 text-white shadow-lg animate-floaty">
+            <div className="text-[10px] font-bold leading-tight">
+              Call Us Now<br /><span className="font-normal opacity-80">24/7 Support</span>
+            </div>
+          </div>
+          <div
+            className="flex items-center gap-3 rounded-full bg-green-500 px-4 py-2 text-white shadow-lg animate-floaty"
+            style={{ animationDelay: "1s" }}
+          >
+            <div className="text-[10px] font-bold leading-tight">
+              Chat With Us<br /><span className="font-normal opacity-80">We're online now</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* WHY CHOOSE SECTION - UPDATED WITH ANIMATIONS */}
-      <section ref={whyChooseRef} className="py-16 md:py-20 overflow-hidden">
+      <section ref={whyChooseRef} className="pt-20 pb-16 md:pt-24 md:pb-20 overflow-hidden">
         <div className="mx-auto max-w-6xl px-4">
           <SectionTitle 
             title="WHY CHOOSE GIZE PLC" 
@@ -718,33 +710,25 @@ const StatsSection = () => {
               <div 
                 key={item.id} 
                 ref={el => cardRefs.current[index] = el}
-                className={`group relative rounded bg-white p-8 text-center shadow-lg transition-all duration-500 hover:-translate-y-1 border-t-4 border-red-500
+                className={`why-card relative rounded bg-white p-8 text-center shadow-lg transition-all duration-700 border-t-4 border-red-500 ring-1 ring-red-100/60
                   ${isWhyChooseVisible ? 'animate-slideFromTop opacity-100' : 'opacity-0 translate-y-[-50px]'}`}
                 style={{
                   animationDelay: isWhyChooseVisible ? `${index * 150}ms` : '0ms',
                   animationFillMode: 'forwards'
                 }}
-                onMouseEnter={() => setActiveCard(item.id)}
-                onMouseLeave={() => setActiveCard(null)}
-                onTouchStart={() => setActiveCard(item.id)}
-                onTouchEnd={() => setActiveCard(null)}
               >
-                {/* Red Overlay Animation */}
-                <div className={`absolute inset-0 bg-gradient-to-br from-red-500/0 via-red-500/5 to-red-500/10 
-                  transition-all duration-300 ease-out rounded
-                  ${activeCard === item.id ? 'opacity-100 scale-105' : 'opacity-0 scale-100'}`}></div>
-                
                 <div className="relative z-10">
                   <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-red-50 
-                    transition-all duration-300 group-hover:scale-110 group-hover:bg-red-100">
+                    transition-all duration-500 animate-floaty">
                     <img 
                       src={item.icon} 
                       alt={item.title} 
-                      className="h-8 w-8 transition-transform duration-300 group-hover:scale-110" 
+                      className="h-8 w-8 transition-transform duration-700" 
                     />
                   </div>
-                  <h3 className="mb-3 text-lg font-bold text-slate-900 transition-colors duration-300 
-                    group-hover:text-red-600">{item.title}</h3>
+                  <h3 className="mb-3 text-lg font-bold text-slate-900 transition-colors duration-500">
+                    {item.title}
+                  </h3>
                   <p className="text-xs leading-relaxed text-slate-500">{item.desc}</p>
                 </div>
               </div>
@@ -797,6 +781,15 @@ const StatsSection = () => {
               </div>
             ))}
           </div>
+          <div className="mt-10 flex justify-center">
+            <a
+              href="#services"
+              className="inline-flex items-center gap-2 text-sm font-bold text-red-600 hover:text-red-700 transition-colors"
+            >
+              More Services
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
         </div>
       </section>
 
@@ -812,7 +805,7 @@ const StatsSection = () => {
               {partnerLogos.length > 0 ? (
                 <>
                   {partnerLogos.map((logo, i) => (
-                    <div key={i} className="flex-shrink-0 mx-6">
+                    <div key={i} className="flex-shrink-0 mx-10 md:mx-14">
                       <img 
                         src={logo} 
                         alt="Partner" 
@@ -822,7 +815,7 @@ const StatsSection = () => {
                   ))}
                   {/* Duplicate set for seamless loop */}
                   {partnerLogos.map((logo, i) => (
-                    <div key={`dup-${i}`} className="flex-shrink-0 mx-6">
+                    <div key={`dup-${i}`} className="flex-shrink-0 mx-10 md:mx-14">
                       <img 
                         src={logo} 
                         alt="Partner" 
@@ -843,7 +836,7 @@ const StatsSection = () => {
                     { name: "Maersk", color: "text-red-500 hover:text-red-600" },
                     { name: "CMA CGM", color: "text-indigo-500 hover:text-indigo-600" },
                   ].map((partner, i) => (
-                    <div key={i} className="flex-shrink-0 mx-6">
+                    <div key={i} className="flex-shrink-0 mx-10 md:mx-14">
                       <div className={`text-2xl font-bold ${partner.color} transition-all duration-300 hover:scale-110`}>
                         {partner.name}
                       </div>
@@ -859,7 +852,7 @@ const StatsSection = () => {
                     { name: "Maersk", color: "text-red-500 hover:text-red-600" },
                     { name: "CMA CGM", color: "text-indigo-500 hover:text-indigo-600" },
                   ].map((partner, i) => (
-                    <div key={`dup-${i}`} className="flex-shrink-0 mx-6">
+                    <div key={`dup-${i}`} className="flex-shrink-0 mx-10 md:mx-14">
                       <div className={`text-2xl font-bold ${partner.color} transition-all duration-300 hover:scale-110`}>
                         {partner.name}
                       </div>
@@ -903,7 +896,7 @@ const StatsSection = () => {
             <div className="flex items-end justify-center md:justify-start">
               <div className="flex items-end justify-center md:justify-start">
                 <a 
-                  href="#contact" 
+                  href="#faq" 
                   className="rounded bg-red-600 px-8 py-3 text-xs font-bold text-white uppercase shadow-lg hover:bg-red-700"
                 >
                   Ask More
@@ -914,193 +907,7 @@ const StatsSection = () => {
         </div>
       </section>
 
-     {/* FOOTER - LANDINGFOLIO INSPIRED */}
-     <footer id="contact" className="relative bg-[#EFEFEF] pb-8 text-sm text-slate-700 pt-0">
-        {/* Top Banner - Larger & Wider */}
-        <div className="relative z-30">
-          {/* Banner Container - Increased width */}
-          <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl px-4">
-            <div className="bg-gradient-to-r from-red-600 via-red-500 to-red-600 rounded-xl shadow-xl shadow-red-200/60 
-              py-8 px-8 md:px-12 flex flex-col md:flex-row justify-between items-center 
-              border-2 border-white/20 backdrop-blur-sm overflow-hidden">
-              
-              {/* Background pattern - Larger */}
-              <div className="absolute inset-0 opacity-10">
-                <div className="absolute -top-10 -left-10 w-40 h-40 bg-white/30 rounded-full blur-2xl"></div>
-                <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/30 rounded-full blur-2xl"></div>
-              </div>
-              
-              {/* Shimmer effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent 
-                -translate-x-full animate-shimmer"></div>
-              
-              <div className="relative z-10 flex-1">
-                <h2 className="text-white text-xl md:text-2xl font-bold text-center md:text-left mb-4 md:mb-0">
-                  <span className="block leading-tight">Looking For The Best</span>
-                  <span className="block leading-tight text-base md:text-xl lg:text-2xl bg-gradient-to-r from-white to-red-100 bg-clip-text text-transparent mt-1">
-                    Logistics Transport Services?
-                  </span>
-                </h2>
-              </div>
-              
-              <button className="relative z-10 bg-gradient-to-r from-[#EFEFEF] to-[#E0E0E0] text-slate-800 px-8 py-4 
-                font-bold text-base rounded-lg hover:from-[#E5E5E5] hover:to-[#D5D5D5] transition-all duration-300 
-                hover:scale-105 hover:shadow-xl hover:shadow-slate-900/20 active:scale-95
-                flex items-center gap-3 group mt-4 md:mt-0 border border-slate-300">
-                <span>Contact us</span>
-                <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-2" 
-                  fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
-                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </button>
-            </div>
-          </div>
-          
-          {/* Connector line from banner to footer - Taller */}
-          <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-6 w-1 h-20 
-            bg-gradient-to-b from-red-600/60 to-transparent"></div>
-        </div>
-
-        {/* Main Footer Section - Adjusted for larger banner */}
-        <div className="relative pt-40 pb-6 px-4 md:px-12">
-          <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-4">
-            {/* Column 1: Company Info - Moved social media icons here */}
-            <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-br from-red-50/20 to-transparent 
-                rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              
-              <img src={logo} alt="Gize PLC" className="relative mb-4 h-8 w-auto transition-all duration-300 
-                hover:scale-105 hover:drop-shadow-lg" />
-              <p className="relative text-xs leading-relaxed text-slate-500 mb-4">
-              Gize Logistics and Transport is a Freight forwarding company managed by a team of
-                    professionals who are dedicated to responding promptly to customer demands. We offer
-                    comprehensive services customized to suit your needs
-              </p>
-              
-              {/* Social Media Links - Moved below logo and text */}
-              <div className="mt-6 flex gap-2">
-                {[
-                  { icon: "M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z", color: "bg-blue-600 hover:bg-blue-700", label: "Facebook" },
-                  { icon: "M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z", color: "bg-sky-500 hover:bg-sky-600", label: "Twitter" },
-                  { icon: "M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z", color: "bg-green-500 hover:bg-green-600", label: "WhatsApp" },
-                ].map((social, index) => (
-                  <a key={index} href="#" className={`${social.color} text-white p-2 rounded-lg transition-all 
-                    duration-300 hover:scale-110 hover:shadow-md`} aria-label={social.label}>
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                      <path d={social.icon} />
-                    </svg>
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            {/* Column 2: Our Services - Removed dot from heading */}
-            <div className="relative group">
-              <h3 className="font-bold text-slate-900 mb-4 relative text-sm">
-                Our Services
-              </h3>
-              <ul className="space-y-2 text-xs">
-                {[
-                  "Shipping",
-                  "Freight Forwarding",
-                  "Port Handling",
-                  "Warehousing",
-                  "Transportation",
-                  "Customs Clearance"
-                ].map((item) => (
-                  <li key={item} className="flex items-center gap-2 transition-all duration-300 
-                    hover:translate-x-1 hover:text-red-600 cursor-pointer group/item">
-                    <span className="text-red-600 font-bold text-xs transition-transform duration-300 
-                      group-hover/item:translate-x-1">›</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Column 3: Quick Links - Removed dot from heading and removed CEO */}
-            <div className="relative group">
-              <h3 className="font-bold text-slate-900 mb-4 relative text-sm">
-                Quick Links
-              </h3>
-              <ul className="space-y-2 text-xs">
-                {[
-                  "Home",
-                  "Our Services",
-                  "About us",
-                  "Contact us",
-                  "FAQ"
-                ].map((item) => (
-                  <li key={item} className="flex items-center gap-2 transition-all duration-300 
-                    hover:translate-x-1 hover:text-red-600 cursor-pointer group/item">
-                    <span className="text-red-600 font-bold text-xs transition-transform duration-300 
-                      group-hover/item:translate-x-1">›</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Column 4: Contact Us - Removed dot from heading */}
-            <div className="relative group">
-              <h3 className="font-bold text-slate-900 mb-4 relative text-sm">
-                Contact Us
-              </h3>
-              <ul className="space-y-3 text-xs">
-                <li className="flex items-start gap-3 transition-all duration-300 hover:text-red-600 group/item">
-                  <div className="relative mt-0.5">
-                    <img src={iconLocation} alt="" className="h-4 w-4 transition-all duration-300 
-                      group-hover/item:scale-110 group-hover/item:rotate-6" />
-                  </div>
-                  <span>Bole Rwanda Embassy road</span>
-                </li>
-                <li className="flex items-center gap-3 transition-all duration-300 hover:text-red-600 group/item">
-                  <img src={iconPhone} alt="" className="h-3 w-3 transition-all duration-300 
-                    group-hover/item:scale-110 group-hover/item:rotate-6" />
-                  <span>Tel: +251115 528080</span>
-                </li>
-                <li className="flex items-center gap-3 transition-all duration-300 hover:text-red-600 group/item">
-                  <img src={iconMobile} alt="" className="h-3 w-3 transition-all duration-300 
-                    group-hover/item:scale-110 group-hover/item:rotate-6" />
-                  <span>Mob: +251911 516478</span>
-                </li>
-                <li className="flex items-center gap-3 transition-all duration-300 hover:text-red-600 group/item">
-                  <img src={iconEmail} alt="" className="h-3 w-3 transition-all duration-300 
-                    group-hover/item:scale-110 group-hover/item:rotate-6" />
-                  <span>Email: gize@gizeplc.com</span>
-                </li>
-                <li className="flex items-center gap-3 transition-all duration-300 hover:text-red-600 group/item">
-                  <img src={iconTime} alt="" className="h-3 w-3 transition-all duration-300 
-                    group-hover/item:scale-110 group-hover/item:rotate-6" />
-                  <span>Mon - Fri: 8:00 AM - 6:00 PM</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom Section */}
-        <div className="mt-4 border-t border-slate-300 bg-gradient-to-r from-slate-700 via-slate-800 to-slate-700 
-          py-3 text-center text-xs text-white relative overflow-hidden">
-          
-          {/* Animated background */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent 
-            -translate-x-full animate-shimmer"></div>
-          
-          <div className="relative z-10">
-            <div className="flex flex-col md:flex-row justify-between items-center max-w-6xl mx-auto px-4">
-              <span>© {new Date().getFullYear()} Gize Plc. All Rights Reserved.</span>
-              <div className="flex gap-4 mt-1 md:mt-0">
-                <a href="#" className="hover:text-red-300 transition-colors duration-300 text-xs">Privacy Policy</a>
-                <a href="#" className="hover:text-red-300 transition-colors duration-300 text-xs">Terms of Service</a>
-                <a href="#" className="hover:text-red-300 transition-colors duration-300 text-xs">Sitemap</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-
+      {/* CTA ABOVE FOOTER now rendered globally via App */}
     </div>
   );
 }

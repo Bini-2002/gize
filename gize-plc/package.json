@@ -5,11 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:5174": "vite --host 127.0.0.1 --port 5174",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@iconify/react": "^6.0.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },

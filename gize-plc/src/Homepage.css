@@ -68,6 +68,88 @@
   .animate-heroIn {
     animation: heroIn 0.2s ease-out forwards;
   }
+
+  /* NEW: Inspiring hero title reveal (slower + smoother) */
+  @keyframes heroTitleReveal {
+    0% {
+      opacity: 0;
+      transform: translateY(18px) scale(0.985);
+      filter: blur(8px);
+      letter-spacing: 0.22em;
+    }
+    55% {
+      opacity: 1;
+      filter: blur(0px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0px);
+      letter-spacing: 0.08em;
+    }
+  }
+
+  .hero-title-reveal {
+    animation: heroTitleReveal 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    will-change: transform, opacity, filter;
+  }
+
+  /* Companion fade-up for subtitle/buttons */
+  @keyframes heroFadeUp {
+    0% {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hero-fade-up {
+    animation: heroFadeUp 0.95s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    will-change: transform, opacity;
+  }
+
+  /* WHY CHOOSE cards: continuous glow/sheens (works on mobile & desktop) */
+  .why-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .why-card::before {
+    content: "";
+    position: absolute;
+    inset: -35%;
+    background: conic-gradient(from 180deg, rgba(255, 82, 82, 0.12), rgba(255, 255, 255, 0), rgba(255, 82, 82, 0.16));
+    filter: blur(36px);
+    animation: whyCardGlow 9s ease-in-out infinite;
+    opacity: 0.9;
+    pointer-events: none;
+  }
+
+  .why-card::after {
+    content: "";
+    position: absolute;
+    inset: -8%;
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.55) 50%, rgba(255, 255, 255, 0) 70%);
+    transform: translateX(-120%);
+    animation: whyCardSheen 7s ease-in-out infinite;
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  @keyframes whyCardGlow {
+    0% { transform: rotate(0deg) scale(1); opacity: 0.85; }
+    50% { transform: rotate(180deg) scale(1.04); opacity: 1; }
+    100% { transform: rotate(360deg) scale(1); opacity: 0.85; }
+  }
+
+  @keyframes whyCardSheen {
+    0% { transform: translateX(-140%); }
+    40% { transform: translateX(120%); }
+    100% { transform: translateX(120%); }
+  }
 }
 
 /* Custom brown color */

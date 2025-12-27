@@ -1,1 +1,46 @@
 /* Intentionally left minimal; styles can be added here if needed later. */
+/* Page fade in */
+.fade-in {
+    animation: fadeInPage 0.8s ease forwards;
+  }
+  @keyframes fadeInPage {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  /* Slide in */
+  .slide-in-left { animation: slideInLeft 0.8s ease forwards; }
+  .slide-in-right { animation: slideInRight 0.8s ease forwards; }
+  .slide-in-bottom { animation: slideInBottom 0.8s ease forwards; }
+  
+  @keyframes slideInLeft {
+    0% { opacity: 0; transform: translateX(-50px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes slideInRight {
+    0% { opacity: 0; transform: translateX(50px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes slideInBottom {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Bounce text */
+  .bounce-text p {
+    animation: bounceText 1s ease-in-out infinite alternate;
+  }
+  @keyframes bounceText {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-4px); }
+  }
+  
+  /* CEO image bounce */
+  .bounce {
+    animation: bounceCEO 1.2s ease-in-out infinite alternate;
+  }
+  @keyframes bounceCEO {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+  }
+  

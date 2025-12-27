@@ -14,3 +14,156 @@ body {
   background: #ffffff;
   font-family: "TASA Orbiter", ui-sans-serif, system-ui, sans-serif;
 }
+
+/* Animation utilities (mobile-first, hover effects desktop-only) */
+
+@keyframes gize-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes gize-slide-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes gize-pulse-soft {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 0.9;
+  }
+}
+
+@keyframes gize-skeleton {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200% 0%;
+  }
+}
+
+.page-fade-in {
+  animation: gize-fade-in 420ms ease-out both;
+}
+
+.text-fade-in {
+  animation: gize-fade-in 520ms ease-out both;
+}
+
+.text-fade-in-delayed {
+  animation: gize-fade-in 520ms ease-out both;
+  animation-delay: 120ms;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  will-change: transform, opacity;
+}
+
+.reveal.is-revealed {
+  animation: gize-slide-up 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.tap-feedback {
+  transition: transform 120ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tap-feedback:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hover-scale {
+    transition: transform 180ms ease;
+  }
+
+  .hover-scale:hover {
+    transform: scale(1.04);
+  }
+
+  .card-lift {
+    transition: transform 220ms ease, box-shadow 220ms ease;
+  }
+
+  .card-lift:hover {
+    transform: translate3d(0, -8px, 0);
+  }
+
+  .img-zoom {
+    transition: transform 260ms ease;
+    transform-origin: center;
+  }
+
+  .img-zoom:hover {
+    transform: scale(1.06);
+  }
+}
+
+.pulse-soft {
+  animation: gize-pulse-soft 1.8s ease-in-out infinite;
+}
+
+/* Drawer + overlay helpers */
+.drawer-overlay {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+
+.drawer-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.drawer-panel {
+  transform: translate3d(-100%, 0, 0);
+  transition: transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+}
+
+.drawer-panel.is-open {
+  transform: translate3d(0, 0, 0);
+}
+
+/* Skeleton placeholder (for future content loading states) */
+.skeleton {
+  background: linear-gradient(90deg, rgba(148, 163, 184, 0.18) 0%, rgba(148, 163, 184, 0.28) 50%, rgba(148, 163, 184, 0.18) 100%);
+  background-size: 200% 100%;
+  animation: gize-skeleton 1.2s ease-in-out infinite;
+  border-radius: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-fade-in,
+  .text-fade-in,
+  .text-fade-in-delayed,
+  .reveal,
+  .reveal.is-revealed,
+  .pulse-soft,
+  .drawer-overlay,
+  .drawer-panel,
+  .skeleton {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
