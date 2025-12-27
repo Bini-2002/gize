@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import logo from "../images/gize_logo.png";
 
 import { Icon } from "@iconify/react";
@@ -20,7 +20,7 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [hideTopBar, setHideTopBar] = useState(false);
   const [hideNav, setHideNav] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const lastScrollYRef = useRef(0);
 
   useEffect(() => {
     const onScroll = () => {
@@ -29,16 +29,24 @@ export default function Header() {
       setHideTopBar(y > 10);
 
       // Smooth navbar hide/show: hide when scrolling down, show when scrolling up.
-      const scrollingDown = y > lastScrollY;
+      const scrollingDown = y > lastScrollYRef.current;
       const beyondThreshold = y > 140;
       setHideNav(scrollingDown && beyondThreshold);
-      setLastScrollY(y);
+      lastScrollYRef.current = y;
     };
 
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    // Prevent background scroll when the mobile drawer is open.
+    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
 
   useEffect(() => {
     const onKeyDown = (e) => {
@@ -54,7 +62,8 @@ export default function Header() {
   return (
     <div className="w-full font-sans">
       {/* Fixed header wrapper (guaranteed to stay visible on scroll) */}
-      <div className={`fixed left-0 right-0 top-0 z-50 transition-transform duration-300 ${hideNav ? "-translate-y-full" : "translate-y-0"}`}>
+      <div className="fixed left-0 right-0 top-0 z-50">
+        <div className={`transition-transform duration-300 ${hideNav && !isMobileMenuOpen ? "-translate-y-full" : "translate-y-0"}`}>
         {/* Top Bar - hidden after scroll */}
         <div className={`bg-[#0D4250] text-white text-xs md:text-sm py-3 border-b border-white/10 transition-all duration-300 ${hideTopBar ? "max-h-0 overflow-hidden py-0 opacity-0" : "max-h-24 opacity-100"}`}>
           <div className="mx-auto max-w-7xl px-4 md:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
@@ -138,7 +147,13 @@ export default function Header() {
             {/* Mobile Menu Button */}
             <div className="md:hidden">
               <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                onClick={() => {
+                  setIsMobileMenuOpen((prev) => {
+                    const next = !prev;
+                    if (next) setHideNav(false);
+                    return next;
+                  });
+                }}
                 className="tap-feedback text-black p-2 hover:bg-black/5 rounded"
               >
                 <svg
@@ -168,44 +183,46 @@ export default function Header() {
           </div>
         </div>
 
-          {/* Mobile Drawer (slide-in / slide-out) */}
-          <div className={`md:hidden drawer-overlay fixed inset-0 z-[60] ${isMobileMenuOpen ? "is-open" : ""}`}>
+        </header>
+        </div>
+      </div>
+
+      {/* Mobile Drawer (slide-in / slide-out) */}
+      <div className={`md:hidden drawer-overlay fixed inset-0 z-[60] ${isMobileMenuOpen ? "is-open" : ""}`}>
+        <button
+          type="button"
+          aria-label="Close menu"
+          className="absolute inset-0 bg-black/40"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+
+        <div className={`drawer-panel absolute left-0 top-0 h-full w-[86%] max-w-xs bg-white shadow-2xl ${isMobileMenuOpen ? "is-open" : ""}`}>
+          <div className="flex items-center justify-between border-b border-black/10 px-4 py-4">
+            <span className="text-sm font-extrabold uppercase tracking-wide text-slate-900">Menu</span>
             <button
               type="button"
-              aria-label="Close menu"
-              className="absolute inset-0 bg-black/40"
+              className="tap-feedback rounded p-2 text-black hover:bg-black/5"
               onClick={() => setIsMobileMenuOpen(false)}
-            />
-
-            <div className={`drawer-panel absolute left-0 top-0 h-full w-[82%] max-w-xs bg-white shadow-2xl ${isMobileMenuOpen ? "is-open" : ""}`}>
-              <div className="flex items-center justify-between border-b border-black/10 px-4 py-4">
-                <span className="text-sm font-extrabold uppercase tracking-wide text-slate-900">Menu</span>
-                <button
-                  type="button"
-                  className="tap-feedback rounded p-2 text-black hover:bg-black/5"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-
-              <div className="px-4 py-3">
-                {primaryLinks.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    className="tap-feedback block rounded-md px-3 py-3 text-sm font-extrabold uppercase tracking-wide text-slate-900 hover:bg-black/5"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </div>
-            </div>
+            >
+              <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
           </div>
-        </header>
+
+          <div className="max-h-[calc(100vh-64px)] overflow-y-auto px-4 py-3 pb-10">
+            {primaryLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="tap-feedback block rounded-md px-3 py-3 text-sm font-extrabold uppercase tracking-wide text-slate-900 hover:bg-black/5"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Spacer so page content isn't hidden behind fixed header */}

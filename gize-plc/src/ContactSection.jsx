@@ -8,14 +8,14 @@ export default function ContactSection() {
       {/* CONTACT FORM SECTION */}
       <section id="contact" className="bg-slate-50 py-16">
         <div className="mx-auto max-w-6xl px-4">
-          <div className="rounded-3xl bg-white p-6 shadow-md md:p-12">
+          <div className="reveal rounded-3xl bg-white p-6 shadow-md md:p-12">
             <div className="grid gap-10 md:grid-cols-2 md:items-center">
               {/* LEFT COPY */}
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
                   We&apos;re here to help you
                 </p>
-                <h2 className="mt-3 text-3xl font-extrabold leading-tight text-slate-900 md:text-4xl">
+                <h2 className="text-fade-in-delayed mt-3 text-3xl font-extrabold leading-tight text-slate-900 md:text-4xl">
                   Discuss Your
                   <span className="block font-light">Solution Needs</span>
                 </h2>
@@ -48,7 +48,7 @@ export default function ContactSection() {
               </div>
 
               {/* RIGHT FORM CARD */}
-              <div className="rounded-2xl bg-white p-6 shadow-md md:p-8">
+              <div className="reveal rounded-2xl bg-white p-6 shadow-md md:p-8">
                 <form
                   className="space-y-4"
                   onSubmit={(e) => {
@@ -115,7 +115,7 @@ export default function ContactSection() {
 
                   <button
                     type="submit"
-                    className="inline-flex items-center gap-3 rounded-full bg-red-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-red-700"
+                    className="tap-feedback hover-scale inline-flex items-center gap-3 rounded-full bg-red-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-red-700"
                   >
                     <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/15">
                       <svg
