@@ -1,46 +1,61 @@
-/* Intentionally left minimal; styles can be added here if needed later. */
 /* Page fade in */
 .fade-in {
-    animation: fadeInPage 0.8s ease forwards;
-  }
-  @keyframes fadeInPage {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  
-  /* Slide in */
-  .slide-in-left { animation: slideInLeft 0.8s ease forwards; }
-  .slide-in-right { animation: slideInRight 0.8s ease forwards; }
-  .slide-in-bottom { animation: slideInBottom 0.8s ease forwards; }
-  
-  @keyframes slideInLeft {
-    0% { opacity: 0; transform: translateX(-50px); }
-    100% { opacity: 1; transform: translateX(0); }
-  }
-  @keyframes slideInRight {
-    0% { opacity: 0; transform: translateX(50px); }
-    100% { opacity: 1; transform: translateX(0); }
-  }
-  @keyframes slideInBottom {
-    0% { opacity: 0; transform: translateY(30px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
-  
-  /* Bounce text */
-  .bounce-text p {
-    animation: bounceText 1s ease-in-out infinite alternate;
-  }
-  @keyframes bounceText {
-    0% { transform: translateY(0px); }
-    100% { transform: translateY(-4px); }
-  }
-  
-  /* CEO image bounce */
-  .bounce {
-    animation: bounceCEO 1.2s ease-in-out infinite alternate;
-  }
-  @keyframes bounceCEO {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-10px); }
-  }
-  
+  animation: fadeInPage 0.5s ease forwards;
+}
+@keyframes fadeInPage {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Slide in (Base Definitions) */
+.slide-in-left { animation: slideInLeft 0.8s ease forwards; }
+.slide-in-right { animation: slideInRight 0.8s ease forwards; }
+
+/* Slide in Top (For the main team heading) */
+.slide-in-top { animation: slideInTop 0.8s ease forwards; }
+
+/* Slide in Top Stagger (Used for Staggering Team Members) */
+.slide-in-top-stagger { 
+  animation: slideInTopStagger 0.8s ease forwards;
+  animation-fill-mode: forwards; /* Ensures element stays visible after animation */
+}
+
+@keyframes slideInLeft {
+  0% { opacity: 0; transform: translateX(-50px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInRight {
+  0% { opacity: 0; transform: translateX(50px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* Keyframes for the main team heading */
+@keyframes slideInTop {
+  0% { opacity: 0; transform: translateY(-50px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Keyframes for the staggered team cards (One-by-one effect) */
+@keyframes slideInTopStagger {
+  0% { opacity: 0; transform: translateY(-30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Bounce text (Targeting only <p> elements inside the bounce-text container) */
+.bounce-text p {
+  animation: bounceText 1s ease-in-out infinite alternate;
+}
+
+@keyframes bounceText {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-4px); }
+}
+
+/* CEO image bounce */
+.bounce {
+  animation: bounceCEO 1.2s ease-in-out infinite alternate;
+}
+@keyframes bounceCEO {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-10px); }
+}

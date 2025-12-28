@@ -147,35 +147,7 @@ export default function Services() {
         </div>
       </section>
 
-      {/* CONTACT US */}
-      <section className="bg-slate-50 pt-14 pb-32 md:pt-20 md:pb-52" id="contact">
-        <div className="mx-auto max-w-6xl px-4">
-          <div className="text-center">
-            <h2 className="text-2xl font-extrabold uppercase tracking-wide text-slate-900">CONTACT US</h2>
-          </div>
-
-          <div className="mx-auto mt-10 w-full max-w-md rounded-2xl bg-red-50/40 p-8 shadow-sm transition-all duration-500 hover:shadow-lg">
-            <form className="space-y-4">
-              <input className="w-full rounded bg-white px-4 py-2 text-xs text-slate-700 outline-none ring-1 ring-slate-200 transition-all duration-300 focus:scale-[1.02] focus:ring-2 focus:ring-red-200" placeholder="Name" />
-              <input className="w-full rounded bg-white px-4 py-2 text-xs text-slate-700 outline-none ring-1 ring-slate-200 transition-all duration-300 focus:scale-[1.02] focus:ring-2 focus:ring-red-200" placeholder="Email" />
-              <input className="w-full rounded bg-white px-4 py-2 text-xs text-slate-700 outline-none ring-1 ring-slate-200 transition-all duration-300 focus:scale-[1.02] focus:ring-2 focus:ring-red-200" placeholder="Phone No" />
-              <select className="w-full rounded bg-white px-4 py-2 text-xs text-slate-500 outline-none ring-1 ring-slate-200 transition-all duration-300 focus:scale-[1.02] focus:ring-2 focus:ring-red-200">
-                <option>Select Freight</option>
-                <option>Shipping</option>
-                <option>Freight Forwarding</option>
-                <option>Port Handling</option>
-                <option>Warehousing</option>
-                <option>Transportation</option>
-                <option>Customs clearance</option>
-              </select>
-              <textarea rows={5} className="w-full resize-none rounded bg-white px-4 py-2 text-xs text-slate-700 outline-none ring-1 ring-slate-200 transition-all duration-300 focus:scale-[1.02] focus:ring-2 focus:ring-red-200" placeholder="Message" />
-              <button type="button" className="mx-auto mt-2 block w-40 rounded-full bg-red-600 py-2 text-xs font-extrabold uppercase tracking-wide text-white shadow-sm transition-all duration-300 hover:scale-105 hover:bg-red-700 hover:shadow-lg">
-                Submit
-              </button>
-            </form>
-          </div>
-        </div>
-      </section>
+      
     </div>
   );
 }

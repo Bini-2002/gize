@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
+import ScrollToTopButton from "./components/ScrollToTopButton";
 
 import Homepage from "./Homepage.jsx";
 import About from "./About.jsx";
@@ -103,6 +104,8 @@ export default function App() {
       <div className="bg-[#0D4250] pt-12 md:pt-14">
         <FooterCTA />
         <Footer />
+        <ScrollToTopButton />
+        
       </div>
     </div>
   );

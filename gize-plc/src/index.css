@@ -224,3 +224,17 @@ body {
     opacity: 1 !important;
   }
 }
+
+
+@keyframes floatUp {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.scroll-float {
+  animation: floatUp 2s ease-in-out infinite;
+}

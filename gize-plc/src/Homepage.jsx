@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useState, useRef, useCallback } from "react";
+
+import transparentRedPattern from "./images/i2.jpeg";
 import "./Homepage.css";
 import logo from "./images/gize_logo.png";
 import heroI2 from "./images/i2.jpeg";
@@ -777,13 +779,14 @@ const StatsSection = () => {
             ))}
           </div>
           <div className="mt-10 flex justify-center">
-            <a
-              href="#services"
-              className="inline-flex items-center gap-2 text-sm font-bold text-red-600 hover:text-red-700 transition-colors"
-            >
-              More Services
-              <span aria-hidden="true">→</span>
-            </a>
+          <button
+  type="button"
+  onClick={() => (window.location.href = "/#services")}
+  className="hidden md:inline-block rounded-full bg-red-500 px-4 py-2 text-xs font-bold text-white uppercase tracking-wide shadow-md transition hover:bg-red-600"
+>
+  More Services →
+</button>
+
           </div>
         </div>
       </section>

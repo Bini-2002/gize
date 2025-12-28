@@ -3,5 +3,24 @@
     "aos": "^2.3.4",
     "framer-motion": "^12.23.26",
     "react-icons": "^5.5.0"
-  }
+  },
+  "name": "gize",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bini-2002/gize.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bini-2002/gize/issues"
+  },
+  "homepage": "https://github.com/Bini-2002/gize#readme"
 }

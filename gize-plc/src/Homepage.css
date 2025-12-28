@@ -22,7 +22,7 @@
   }
   
   .animate-slideFromTop {
-    animation: slideFromTop 0.6s ease-out forwards;
+    animation: slideFromTop 0.4s ease-out forwards;
   }
   
   /* Partner scrolling animation */
