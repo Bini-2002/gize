@@ -73,7 +73,7 @@ export default function FAQ() {
       </section>
 
       {/* FAQ SECTION */}
-      <section className="bg-slate-50 pt-14 pb-32 md:pt-20 md:pb-56">
+      <section className="bg-slate-50 pt-14 pb-16 md:pt-20 md:pb-24">
         <div className="mx-auto max-w-6xl px-4">
           <div className="grid gap-10 md:grid-cols-2 md:items-start">
             <div className="pt-6 md:pt-16">

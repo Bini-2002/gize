@@ -10,7 +10,7 @@ import Services from "./Services.jsx";
 import FAQ from "./FAQ.jsx";
 import Contact from "./Contact.jsx";
 import ContactSection from "./ContactSection.jsx";
-import FooterCTA from "./FooterCTA.jsx";
+//import FooterCTA from "./FooterCTA.jsx";
 import PrivacyPolicy from "./PrivacyPolicy.jsx";
 import TermsAndConditions from "./TermsAndConditions.jsx";
 import Shipping from "./Shipping.jsx";
@@ -101,12 +101,12 @@ export default function App() {
         </div>
         {!isHomepage && !isContactPage && <ContactSection />}
       </main>
-      <div className="bg-[#0D4250] pt-12 md:pt-14">
-        <FooterCTA />
+     
+      
         <Footer />
         <ScrollToTopButton />
         
-      </div>
+      
     </div>
   );
 }

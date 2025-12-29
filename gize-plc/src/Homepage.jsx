@@ -8,7 +8,10 @@ import heroI3 from "./images/i3.jpeg";
 import carIcon from "./images/car.svg";
 import timeIcon from "./images/time.png";
 import globalIcon from "./images/global.svg";
-import testimonialImg from "./images/Jessica-James.png";
+//import testimonialImg from "./images/Jessica-James.png";
+import testimonialImg2 from "./images/John Smith.jpeg";
+import testimonialImg3 from "./images/Michael Chen.jpeg";
+import testimonialImg4 from "./images/Sarah Johnson.jpeg";
 import iconLocation from "./icons/location.png";
 import iconPhone from "./icons/telephone-call.png";
 import iconMobile from "./icons/iphone.png";
@@ -90,28 +93,28 @@ const TestimonialCarousel = () => {
       id: 1,
       name: "John Smith",
       role: "CEO, TechCorp Inc.",
-      img: testimonialImg,
+      img: testimonialImg2,
       quote: "Gize Logistics has transformed our supply chain operations. Their efficient services and dedicated team ensured our products reached global markets seamlessly."
     },
-    {
-      id: 2,
-      name: "Jessica James",
-      role: "Operations Manager, Global Imports",
-      img: testimonialImg,
-      quote: "Working with Gize has been a game-changer. Their attention to detail and reliable delivery schedules have significantly reduced our logistics costs."
-    },
+   // {
+    //  id: 2,
+     // name: "Jessica James",
+      //role: "Operations Manager, Global Imports",
+     // img: testimonialImg,
+     // quote: "Working with Gize has been a game-changer. Their attention to detail and reliable delivery schedules have significantly reduced our logistics costs."
+   // },
     {
       id: 3,
       name: "Michael Chen",
       role: "Supply Chain Director",
-      img: testimonialImg,
+      img: testimonialImg3,
       quote: "The team's expertise in customs clearance and international shipping saved us countless hours and headaches. Highly recommended for global logistics."
     },
     {
       id: 4,
       name: "Sarah Johnson",
       role: "Logistics Coordinator",
-      img: testimonialImg,
+      img: testimonialImg4,
       quote: "From warehousing to last-mile delivery, Gize provides comprehensive solutions. Their real-time tracking system gives us complete visibility."
     },
   ];

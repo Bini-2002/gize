@@ -1,4 +1,4 @@
-export default function FooterCTA() {
+/* export default function FooterCTA() {
   return (
     <div className="mx-auto max-w-6xl px-4">
       <div className="reveal bg-red-600 px-6 py-8 shadow-xl md:px-10 md:py-10">
@@ -24,3 +24,4 @@ export default function FooterCTA() {
     </div>
   );
 }
+*/
